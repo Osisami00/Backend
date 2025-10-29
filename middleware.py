@@ -27,11 +27,12 @@ def verify_token(request: HTTPAuthorizationCredentials = Security(bearer)):
     # to split to stringg
     # token = payload.split(" ")[1]   #to split what is coming from space between
 
-    verified_token = jwt.decode(token, secret_key, algorthm=["HS256"])
+    verified_token = jwt.decode(token, secret_key, algorithms=["HS256"])
 
     # expiry_time = verified_token.get("exp")
 
     return {
+        "id": verified_token.get("id"),
         "email": verified_token.get("email"),
         "userType": verified_token.get("userType")
     }
